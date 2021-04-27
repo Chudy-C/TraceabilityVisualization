@@ -1,0 +1,58 @@
+﻿@model TraceabilityVisualization_v2.Models.Komora
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Komora</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nr_wozka" class="control-label"></label>
+                <input asp-for="Nr_wozka" class="form-control" />
+                <span asp-validation-for="Nr_wozka" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nm" class="control-label"></label>
+                <input asp-for="Nm" class="form-control" />
+                <span asp-validation-for="Nm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Material" class="control-label"></label>
+                <input asp-for="Material" class="form-control" />
+                <span asp-validation-for="Material" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Typ_cewki" class="control-label"></label>
+                <input asp-for="Typ_cewki" class="form-control" />
+                <span asp-validation-for="Typ_cewki" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kolor_cewki" class="control-label"></label>
+                <input asp-for="Kolor_cewki" class="form-control" />
+                <span asp-validation-for="Kolor_cewki" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TS_KOM1" class="control-label"></label>
+                <input asp-for="TS_KOM1" class="form-control" />
+                <span asp-validation-for="TS_KOM1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceabilityVisualization_v2", "TraceabilityVisualization_v2.csproj", "{A5B0E2BB-61A6-48C0-9F8D-A8E6E8927A3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5B0E2BB-61A6-48C0-9F8D-A8E6E8927A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B0E2BB-61A6-48C0-9F8D-A8E6E8927A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B0E2BB-61A6-48C0-9F8D-A8E6E8927A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B0E2BB-61A6-48C0-9F8D-A8E6E8927A3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C09EAD3-6FDE-4926-8A0B-23FDE44752EE}
+	EndGlobalSection
+EndGlobal
