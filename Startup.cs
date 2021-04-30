@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using TraceabilityVisualization_v2.Data;
 
 namespace TraceabilityVisualization_v2
 {
@@ -27,7 +28,12 @@ namespace TraceabilityVisualization_v2
             services.AddControllersWithViews();
 
             services.AddDbContext<KomoraContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("KomoraContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.AddDbContext<AsortymentContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.AddDbContext<VisualizationContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

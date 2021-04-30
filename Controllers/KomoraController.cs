@@ -36,7 +36,9 @@ namespace TraceabilityVisualization_v2.Controllers
                 sqlAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
                 sqlAdapter.Fill(dataTable);
             }
-            // Podział na dwie tabele
+
+            //stworzyć dwa modele oraz listy dwóch zapytań sql 
+            // spiąć w jedną klasę oraz wyświetlić jeden dla lewej strony, drugi dla prawej
 
             object sumaSuszarniaCol = dataTable.Compute("Sum(Suszarnia)", string.Empty);
             object sumaKomoraCol = dataTable.Compute("Sum(Komora)", string.Empty);
@@ -51,6 +53,33 @@ namespace TraceabilityVisualization_v2.Controllers
             _sumaDzial["SUMA"] = sumaSumaCol;
             dataTable.Rows.Add(_sumaDzial);
 
+/*            DataTable tmpTable = new DataTable();
+            tmpTable.Clear();
+            tmpTable.Columns.Add("Asortyment");
+            tmpTable.Columns.Add("Suszarnia");
+            tmpTable.Columns.Add("Komora");
+            tmpTable.Columns.Add("SUMA");
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                object valuePW = row["Przewijalnia"];
+                if (valuePW == DBNull.Value)
+                {
+                    tmpTable.ImportRow(row);
+                }
+            }
+
+            object suszarniaNotNull = tmpTable.Compute("Sum(Suszarnia)", string.Empty);
+            object komoraNotNull = tmpTable.Compute("Sum(Komora)", string.Empty);
+            object sumaNotNull = tmpTable.Compute("Sum(SUMA)", string.Empty);
+
+            DataRow _notNullValues = dataTable.NewRow();
+            _notNullValues["Asortyment"] = "SUMA";
+            _notNullValues["Suszarnia"] = suszarniaNotNull;
+            _notNullValues["Komora"] = komoraNotNull;
+            _notNullValues["SUMA"] = sumaNotNull;
+
+            dataTable.Rows.Add(_notNullValues);*/
 
             return View(dataTable);
         }

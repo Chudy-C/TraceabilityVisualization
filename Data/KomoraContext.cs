@@ -12,5 +12,5 @@ using TraceabilityVisualization_v2.Models;
         {
         }
 
-        public DbSet<TraceabilityVisualization_v2.Models.Komora> Komora { get; set; }
+        public DbSet<Komora> Komora { get; set; }
     }

@@ -1,0 +1,166 @@
+﻿@model TraceabilityVisualization_v2.Models.Visualization.VisualizationLists
+@using System.Data
+
+@{
+    ViewData["Title"] = "Asortyment na działach";
+}
+
+<style>
+    h3{
+        text-align:center;
+    }
+    .table-responsive {
+        float: left;
+        width: 50%;
+        padding: 1%;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 50%;
+        border: 1px solid #ddd;
+    }
+    th,tr,td{
+        font-size: 18px;
+        text-align : center;
+    }
+    .suma{
+        background-color: #45b6fe;
+    }
+
+</style>
+
+<h3>Asortyment / dział</h3>
+
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Asortyment
+                    </th>
+                    <th>
+                        Suszarnia
+                    </th>
+                    <th>
+                        Komora
+                    </th>
+                    <th>
+                        Przewijalnia
+                    </th>
+                    <th class="suma">
+                        Suma
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listWithPW)
+                {
+                    if (item.asortyment != "SUMA")
+                    {
+                        <tr>
+                            <td>
+                                @item.asortyment
+                            </td>
+                            <td>
+                                @item.suszarnia
+                            </td>
+                            <td>
+                                @item.komora
+                            </td>
+                            <td>
+                                @item.przewijalnia
+                            </td>
+                            <td class="suma">
+                                <b>@item.suma</b>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="suma">
+                            <td>
+                                <b>@item.asortyment</b>
+                            </td>
+                            <td>
+                                <b>@item.suszarnia</b>
+                            </td>
+                            <td>
+                                <b>@item.komora</b>
+                            </td>
+                            <td>
+                                <b>@item.przewijalnia</b>
+                            </td>
+                            <td>
+                                <b>@item.suma</b>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Asortyment
+                    </th>
+                    <th>
+                        Suszarnia
+                    </th>
+                    <th>
+                        Komora
+                    </th>
+                    <th class="suma">
+                        Suma
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listWithoutPW)
+                {
+                    if (item.asortyment != "SUMA")
+                    {
+                        <tr>
+                            <td>
+                                @item.asortyment
+                            </td>
+                            <td>
+                                @item.suszarnia
+                            </td>
+                            <td>
+                                @item.komora
+                            </td>
+                            <td class="suma">
+                                <b>@item.suma</b>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="suma">
+                            <td>
+                                <b>@item.asortyment</b>
+                            </td>
+                            <td>
+                                <b>@item.suszarnia</b>
+                            </td>
+                            <td>
+                                <b>@item.komora</b>
+                            </td>
+                            <td>
+                                <b>@item.suma</b>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

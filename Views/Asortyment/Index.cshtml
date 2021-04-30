@@ -1,0 +1,73 @@
+﻿@*@model TraceabilityVisualization_v2.Models.Asortyment
+
+@{
+    ViewData["Title"] = "Asortyment na działach";
+}
+
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Asortyment
+                    </th>
+                    <th>
+                        Suszarnia
+                    </th>
+                    <th>
+                        Komora sezonowania
+                    </th>
+                    <th>
+                        Przewijalnia
+                    </th>
+                    <th>
+                        Suma
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Rows.Count - 1; i++)
+                {
+
+                    <tr>
+                        <td>
+                            @Model.Rows[i]["Asortyment"]
+                        </td>
+                        <td>
+                            @Model.Rows[i]["Suszarnia"]
+                        </td>
+                        <td>
+                            @Model.Rows[i]["Komora"]
+                        </td>
+                        <td>
+                            @Model.Rows[i]["Przewijalnia"]
+                        </td>
+                        <td>
+                            <b>@Model.Rows[i]["SUMA"]</b>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <b>@Model.Rows[Model.Rows.Count - 1]["Asortyment"]</b>
+                    </td>
+                    <td>
+                        <b>@Model.Rows[Model.Rows.Count - 1]["Suszarnia"]</b>
+                    </td>
+                    <td>
+                        <b>@Model.Rows[Model.Rows.Count - 1]["Komora"]</b>
+                    </td>
+                    <td>
+                        <b>@Model.Rows[Model.Rows.Count - 1]["Przewijalnia"]</b>
+                    </td>
+                    <td>
+                        <b>@Model.Rows[Model.Rows.Count - 1]["SUMA"]</b>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+*@
