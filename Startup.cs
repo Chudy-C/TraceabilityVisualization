@@ -25,13 +25,28 @@ namespace TraceabilityVisualization_v2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+/*
+            services.AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth", config =>
+                {
+                    config.Cookie.Name = "Login.Cookie";
+                    config.LoginPath = "/Suszarnia/Authenticate";
+                });*/
+
             services.AddControllersWithViews();
 
-            services.AddDbContext<KomoraContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
             services.AddDbContext<AsortymentContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
             services.AddDbContext<VisualizationContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+
+            services.AddDbContext<KomoraContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+
+            services.AddDbContext<WozekContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+
+            services.AddDbContext<SuszarniaContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
 
         }

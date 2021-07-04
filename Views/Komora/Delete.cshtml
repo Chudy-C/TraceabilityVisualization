@@ -1,4 +1,4 @@
-﻿@model TraceabilityVisualization_v2.Models.Komora
+﻿@model TraceabilityVisualization_v2.Models.Traceability.Komora
 
 @{
     ViewData["Title"] = "Delete";
@@ -50,7 +50,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID_Trace" />
+        <input type="hidden" asp-for="Nr_wozka" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

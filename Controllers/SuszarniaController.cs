@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -12,56 +13,55 @@ using TraceabilityVisualization_v2.Models.Traceability;
 
 namespace TraceabilityVisualization_v2.Controllers
 {
-    public class KomoraController : Controller
+    public class SuszarniaController : Controller
     {
-        private readonly KomoraContext _context;
+        private readonly SuszarniaContext _context;
         private readonly IConfiguration _configuration;
-        public KomoraController(KomoraContext context,IConfiguration configuration)
+
+        public SuszarniaController(SuszarniaContext context, IConfiguration configuration)
         {
-            _context = context;
             _configuration = configuration;
+            _context = context;
         }
 
-        // GET: Komora
         public IActionResult Index(string searchNm, string searchMaterial, string searchName, string searchColor)
         {
-
             tmpTraceData tmpData = new tmpTraceData(_configuration);
             TraceabilityLists traceabilityCarts = new TraceabilityLists();
 
-            traceabilityCarts.Komora = tmpData.getKomoraCarts();
+            traceabilityCarts.Suszarnia = tmpData.GetSuszarniaCarts();
 
-            var komora = from k in traceabilityCarts.Komora select k;
+            var suszarnia = from k in traceabilityCarts.Suszarnia select k;
 
             if (!String.IsNullOrEmpty(searchNm))
-                komora = komora.Where(k => k.Nm.Contains(searchNm));
+                suszarnia = suszarnia.Where(k => k.Nm.Contains(searchNm));
             if (!String.IsNullOrEmpty(searchMaterial))
-                komora = komora.Where(k => k.Material.Contains(searchMaterial));
+                suszarnia = suszarnia.Where(k => k.Material.Contains(searchMaterial));
             if (!String.IsNullOrEmpty(searchName))
-                komora = komora.Where(k => k.Nr_wozka.Contains(searchName));
+                suszarnia = suszarnia.Where(k => k.Nr_wozka.Contains(searchName));
             if (!String.IsNullOrEmpty(searchColor))
-                komora = komora.Where(k => k.Kolor_cewki.Contains(searchColor));
+                suszarnia = suszarnia.Where(k => k.Kolor_cewki.Contains(searchColor));
 
-            traceabilityCarts.Komora = komora.ToList();
+            traceabilityCarts.Suszarnia = suszarnia.ToList();
 
             return View(traceabilityCarts);
         }
 
         public IActionResult Edit(int? id)
         {
-            Komora komoraCart = new Komora();
-            if (id>0)
+            Suszarnia suszarniaCart = new Suszarnia();
+            if (id > 0)
             {
-                komoraCart = FindCartByID(id);
+                suszarniaCart = FindCartByID(id);
             }
-            return View(komoraCart);
+            return View(suszarniaCart);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID_Trace,Nr_wozka,Nm,Material,Typ_cewki,Kolor_cewki,TS_KOM1")] Komora komora)
+        public IActionResult Edit(int id, [Bind("ID_Trace,Nr_wozka,Nm,Material,Typ_cewki,Kolor_cewki,Suszenie1,TS_SUSZ1")] Suszarnia suszarnia)
         {
-            if (id != komora.ID_Trace)
+            if (id != suszarnia.ID_Trace)
             {
                 return NotFound();
             }
@@ -70,13 +70,36 @@ namespace TraceabilityVisualization_v2.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            return View(komora);
+            return View(suszarnia);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            Suszarnia suszarniaCart = FindCartByID(id);
+
+            return View(suszarniaCart);
+        }
+
+        [HttpPost,ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            using(SqlConnection sqlConnection = new SqlConnection(_configuration.GetConnectionString("ConnectionString")))
+            {
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand("ResetCartByID", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("ID_Trace", id);
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         [NonAction]
-        public Komora FindCartByID(int? ID_Trace)
+        public Suszarnia FindCartByID(int? ID_Trace)
         {
-            Komora komoraCart = new Komora();
+            Suszarnia suszarniaCart = new Suszarnia();
             using (SqlConnection sqlConnection = new SqlConnection(_configuration.GetConnectionString("ConnectionString")))
             {
                 DataTable dt = new DataTable();
@@ -87,19 +110,38 @@ namespace TraceabilityVisualization_v2.Controllers
                 sqlAdapter.Fill(dt);
                 if (dt.Rows.Count == 1)
                 {
-                    komoraCart.ID_Trace = Convert.ToInt32(dt.Rows[0]["ID_Trace"].ToString());
-                    komoraCart.Nr_wozka = dt.Rows[0]["Nr_wozka"].ToString();
-                    komoraCart.Material = dt.Rows[0]["Material"].ToString();
-                    komoraCart.Nm = dt.Rows[0]["Nm"].ToString();
-                    komoraCart.Typ_cewki = dt.Rows[0]["Typ_cewki"].ToString();
-                    komoraCart.Kolor_cewki = dt.Rows[0]["Kolor_cewki"].ToString();
-                    komoraCart.TS_KOM1 = Convert.ToDateTime(dt.Rows[0]["TS_KOM1"]);
+                    suszarniaCart.ID_Trace = Convert.ToInt32(dt.Rows[0]["ID_Trace"].ToString());
+                    suszarniaCart.Nr_wozka = dt.Rows[0]["Nr_wozka"].ToString();
+                    suszarniaCart.Material = dt.Rows[0]["Material"].ToString();
+                    suszarniaCart.Nm = dt.Rows[0]["Nm"].ToString();
+                    suszarniaCart.Typ_cewki = dt.Rows[0]["Typ_cewki"].ToString();
+                    suszarniaCart.Kolor_cewki = dt.Rows[0]["Kolor_cewki"].ToString();
+                    suszarniaCart.Suszenie1 = dt.Rows[0]["Suszenie1"].ToString();
+                    suszarniaCart.TS_SUSZ1 = Convert.ToDateTime(dt.Rows[0]["TS_SUSZ1"]);
                 }
-                return komoraCart;
+                return suszarniaCart;
             }
         }
 
-        /*        // GET: Komora/Details/5
+/*        [Authorize]
+        public IActionResult Secret()
+        {
+            return View();
+        }
+
+        public IActionResult Authenticate()
+        {
+
+            return RedirectToAction(nameof(Edit));
+        }
+*/
+        /*        // GET: Suszarnia
+                public async Task<IActionResult> Index()
+                {
+                    return View(await _context.Suszarnia.ToListAsync());
+                }
+
+                // GET: Suszarnia/Details/5
                 public async Task<IActionResult> Details(int? id)
                 {
                     if (id == null)
@@ -107,64 +149,62 @@ namespace TraceabilityVisualization_v2.Controllers
                         return NotFound();
                     }
 
-                    var komora = await _context.Komora
+                    var suszarnia = await _context.Suszarnia
                         .FirstOrDefaultAsync(m => m.ID_Trace == id);
-                    if (komora == null)
+                    if (suszarnia == null)
                     {
                         return NotFound();
                     }
 
-                    return View(komora);
+                    return View(suszarnia);
                 }
 
-                // GET: Komora/Create
+                // GET: Suszarnia/Create
                 public IActionResult Create()
                 {
                     return View();
                 }
 
-                // POST: Komora/Create
+                // POST: Suszarnia/Create
                 // To protect from overposting attacks, enable the specific properties you want to bind to.
                 // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
                 [HttpPost]
                 [ValidateAntiForgeryToken]
-                public async Task<IActionResult> Create([Bind("ID_Trace,Nr_wozka,Nm,Material,Typ_cewki,Kolor_cewki,TS_KOM1")] Komora komora)
+                public async Task<IActionResult> Create([Bind("ID_Trace,Nr_wozka,Nm,Material,Typ_cewki,Kolor_cewki,Suszenie1,TS_SUSZ1")] Suszarnia suszarnia)
                 {
                     if (ModelState.IsValid)
                     {
-                        _context.Add(komora);
+                        _context.Add(suszarnia);
                         await _context.SaveChangesAsync();
                         return RedirectToAction(nameof(Index));
                     }
-                    return View(komora);
+                    return View(suszarnia);
                 }
-        */
 
-        /*        // GET: Komora/Edit/5
-                public async Task<IActionResult> Edit(string? nr_wozka)
+                // GET: Suszarnia/Edit/5
+                public async Task<IActionResult> Edit(int? id)
                 {
-                    if (nr_wozka == null)
+                    if (id == null)
                     {
                         return NotFound();
                     }
 
-                    var komora = await _context.Komora.FindAsync(nr_wozka);
-                    if (komora == null)
+                    var suszarnia = await _context.Suszarnia.FindAsync(id);
+                    if (suszarnia == null)
                     {
                         return NotFound();
                     }
-                    return View(komora);
+                    return View(suszarnia);
                 }
-        */
-        /*
-                // POST: Komora/Edit/5
+
+                // POST: Suszarnia/Edit/5
                 // To protect from overposting attacks, enable the specific properties you want to bind to.
                 // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
                 [HttpPost]
                 [ValidateAntiForgeryToken]
-                public async Task<IActionResult> Edit(int id, [Bind("ID_Trace,Nr_wozka,Nm,Material,Typ_cewki,Kolor_cewki,TS_KOM1")] Komora komora)
+                public async Task<IActionResult> Edit(int id, [Bind("ID_Trace,Nr_wozka,Nm,Material,Typ_cewki,Kolor_cewki,Suszenie1,TS_SUSZ1")] Suszarnia suszarnia)
                 {
-                    if (id != komora.ID_Trace)
+                    if (id != suszarnia.ID_Trace)
                     {
                         return NotFound();
                     }
@@ -173,12 +213,12 @@ namespace TraceabilityVisualization_v2.Controllers
                     {
                         try
                         {
-                            _context.Update(komora);
+                            _context.Update(suszarnia);
                             await _context.SaveChangesAsync();
                         }
                         catch (DbUpdateConcurrencyException)
                         {
-                            if (!KomoraExists(komora.ID_Trace))
+                            if (!SuszarniaExists(suszarnia.ID_Trace))
                             {
                                 return NotFound();
                             }
@@ -189,10 +229,10 @@ namespace TraceabilityVisualization_v2.Controllers
                         }
                         return RedirectToAction(nameof(Index));
                     }
-                    return View(komora);
+                    return View(suszarnia);
                 }
 
-                // GET: Komora/Delete/5
+                // GET: Suszarnia/Delete/5
                 public async Task<IActionResult> Delete(int? id)
                 {
                     if (id == null)
@@ -200,30 +240,30 @@ namespace TraceabilityVisualization_v2.Controllers
                         return NotFound();
                     }
 
-                    var komora = await _context.Komora
+                    var suszarnia = await _context.Suszarnia
                         .FirstOrDefaultAsync(m => m.ID_Trace == id);
-                    if (komora == null)
+                    if (suszarnia == null)
                     {
                         return NotFound();
                     }
 
-                    return View(komora);
+                    return View(suszarnia);
                 }
 
-                // POST: Komora/Delete/5
+                // POST: Suszarnia/Delete/5
                 [HttpPost, ActionName("Delete")]
                 [ValidateAntiForgeryToken]
                 public async Task<IActionResult> DeleteConfirmed(int id)
                 {
-                    var komora = await _context.Komora.FindAsync(id);
-                    _context.Komora.Remove(komora);
+                    var suszarnia = await _context.Suszarnia.FindAsync(id);
+                    _context.Suszarnia.Remove(suszarnia);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
 
-                private bool KomoraExists(int id)
+                private bool SuszarniaExists(int id)
                 {
-                    return _context.Komora.Any(e => e.ID_Trace == id);
+                    return _context.Suszarnia.Any(e => e.ID_Trace == id);
                 }*/
     }
 }

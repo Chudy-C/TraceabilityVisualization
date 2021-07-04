@@ -3,6 +3,14 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "KomoraContext"
+    },
+    "mssql2": {
+      "type": "mssql.local",
+      "connectionId": "WozekContext"
+    },
+    "mssql3": {
+      "type": "mssql.local",
+      "connectionId": "SuszarniaContext"
     }
   }
 }

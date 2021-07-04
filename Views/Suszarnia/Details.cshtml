@@ -1,4 +1,5 @@
-﻿@model TraceabilityVisualization_v2.Models.Traceability.Komora
+﻿@model TraceabilityVisualization_v2.Models.Traceability.Suszarnia
+
 @{
     ViewData["Title"] = "Details";
 }
@@ -6,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Komora</h4>
+    <h4>Suszarnia</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -40,14 +41,20 @@
             @Html.DisplayFor(model => model.Kolor_cewki)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TS_KOM1)
+            @Html.DisplayNameFor(model => model.Suszenie1)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TS_KOM1)
+            @Html.DisplayFor(model => model.Suszenie1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TS_SUSZ1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TS_SUSZ1)
         </dd>
     </dl>
 </div>
 <div>
-@*    <a asp-action="Edit" asp-route-id="@Model.ID_Trace">Edit</a> |
-    <a asp-action="Index">Back to List</a>*@
+    <a asp-action="Edit" asp-route-id="@Model.ID_Trace">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

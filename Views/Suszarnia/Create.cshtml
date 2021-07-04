@@ -1,4 +1,4 @@
-﻿@model TraceabilityVisualization_v2.Models.Traceability.Komora
+﻿@model TraceabilityVisualization_v2.Models.Traceability.Suszarnia
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>Komora</h4>
+<h4>Suszarnia</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -38,9 +38,14 @@
                 <span asp-validation-for="Kolor_cewki" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TS_KOM1" class="control-label"></label>
-                <input asp-for="TS_KOM1" class="form-control" />
-                <span asp-validation-for="TS_KOM1" class="text-danger"></span>
+                <label asp-for="Suszenie1" class="control-label"></label>
+                <input asp-for="Suszenie1" class="form-control" />
+                <span asp-validation-for="Suszenie1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TS_SUSZ1" class="control-label"></label>
+                <input asp-for="TS_SUSZ1" class="form-control" />
+                <span asp-validation-for="TS_SUSZ1" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

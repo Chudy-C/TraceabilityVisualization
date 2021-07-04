@@ -1,17 +1,17 @@
-﻿@model TraceabilityVisualization_v2.Models.Traceability.Komora
+﻿@model TraceabilityVisualization_v2.Models.Traceability.Suszarnia
 
 @{
     ViewData["Title"] = "Edit";
 }
 
 <style>
-    .container{
-        padding-left:25px;
+    .container {
+        padding-left: 25px;
     }
 </style>
 
 <div class="container">
-    <h1>Edycja</h1>
+    <h1>Edycja [Suszarnia]</h1>
 
     <h4>Wózek : @Model.Nr_wozka</h4>
     <hr />
@@ -46,9 +46,14 @@
                     <span asp-validation-for="Kolor_cewki" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="TS_KOM1" class="control-label"></label>
-                    <input asp-for="TS_KOM1" class="form-control" />
-                    <span asp-validation-for="TS_KOM1" class="text-danger"></span>
+                    <label asp-for="Suszenie1" class="control-label"></label>
+                    <input asp-for="Suszenie1" class="form-control" />
+                    <span asp-validation-for="Suszenie1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TS_SUSZ1" class="control-label"></label>
+                    <input asp-for="TS_SUSZ1" class="form-control" />
+                    <span asp-validation-for="TS_SUSZ1" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
@@ -56,11 +61,12 @@
             </form>
         </div>
     </div>
-
     <div>
         <a asp-action="Index">Back to List</a>
     </div>
 </div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

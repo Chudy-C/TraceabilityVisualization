@@ -1,0 +1,128 @@
+﻿@model IEnumerable<TraceabilityVisualization_v2.Models.Traceability.Wozek>
+
+@{
+    ViewData["Title"] = "Puste wózki";
+}
+
+<head>
+    <title>Puste wózki</title>
+    <meta http-equiv="refresh" content="60" />
+</head>
+
+<style>
+    h1{
+        text-align:center;
+        padding:10px;
+    }
+    h2 {
+        text-align: center;
+        padding: 10px;
+    }
+    .table-responsive {
+        display:flex;
+        justify-content: center;
+    }
+    table {
+        align-self : center;
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 75%;
+        border: 1px solid #ddd;
+        position:center;
+    }
+    th, tr, td {
+        font-size: 18px;
+        text-align: center;
+    }
+    td{
+        padding:5px;
+    }
+</style>
+
+<div class="container-fluid">
+    <h1>Puste wózki</h1>
+    <div>
+        <p>
+            <h2>Ostatni wózek : <b>@Model.Last().Nr_wozka</b></h2>
+        </p>
+    </div>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Nr wózka
+                    </th>
+                    <th>
+                        Waga [kg]
+                    </th>
+                    <th>
+                        Lokalizacja
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var cart in Model)
+            {
+                <tr>
+                    <td>
+                        @cart.Nr_wozka
+                    </td>
+                    <td>
+                        @cart.Waga_kg
+                    </td>
+                    <td>
+                        @cart.Lokalizacja
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+@* CZYSTY INDEX
+    <h1>Puste wózki</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nr_wozka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Waga_kg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lokalizacja)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nr_wozka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Waga_kg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lokalizacja)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID_Wozka">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID_Wozka">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID_Wozka">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+*@

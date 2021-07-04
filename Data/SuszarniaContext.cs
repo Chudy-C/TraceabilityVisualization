@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TraceabilityVisualization_v2.Models.Traceability;
 
-    public class KomoraContext : DbContext
+    public class SuszarniaContext : DbContext
     {
-        public KomoraContext (DbContextOptions<KomoraContext> options)
+        public SuszarniaContext (DbContextOptions<SuszarniaContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Komora> Komora { get; set; }
+        public DbSet<TraceabilityVisualization_v2.Models.Traceability.Suszarnia> Suszarnia { get; set; }
     }

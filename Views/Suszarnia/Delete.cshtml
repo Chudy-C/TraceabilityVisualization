@@ -1,0 +1,73 @@
+﻿@model TraceabilityVisualization_v2.Models.Traceability.Suszarnia
+
+@{
+    ViewData["Title"] = "Usuń z suszarni";
+}
+
+<style>
+    .container{
+        padding-left:25px;
+    }
+    h3{
+        padding-top:20px;
+        padding-bottom:20px;
+    }
+</style>
+
+
+
+<div class="container">
+    <h3>Na pewno chcesz usunąć ten wózek?</h3>
+    <h4>Etap : <b>Suszarnia</b></h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nr_wozka)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nr_wozka)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nm)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nm)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Material)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Material)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Typ_cewki)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Typ_cewki)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Kolor_cewki)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Kolor_cewki)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Suszenie1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Suszenie1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TS_SUSZ1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TS_SUSZ1)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID_Trace" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-action="Index">Wróć do listy</a>
+    </form>
+</div>
