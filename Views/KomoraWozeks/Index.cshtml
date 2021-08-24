@@ -1,0 +1,71 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewData["Title"] = "Wozki na komorze";
+}
+
+<h1>Index</h1>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID_Trace
+            </th>
+            <th>
+                Nr_wozka
+            </th>
+            <th>
+                Nm
+            </th>
+            <th>
+                Material
+            </th>
+            <th>
+                Typ_cewki
+            </th>
+            <th>
+                Kolor_cewki
+            </th>
+            <th>
+                TS_KOM1
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @for ( int i=0; i<Model.Rows.Count; i++) {
+        <tr>
+            <td>
+                @Model.Rows[i]["ID_Trace"]
+            </td>
+            <td>
+                @Model.Rows[i]["Nr_wozka"]
+            </td>
+            <td>
+                @Model.Rows[i]["Nm"]
+            </td>
+            <td>
+                @Model.Rows[i]["Material"]
+            </td>
+            <td>
+                @Model.Rows[i]["Typ_cewki"]
+            </td>
+            <td>
+                @Model.Rows[i]["Kolor_cewki"]
+            </td>
+            <td>
+                @Model.Rows[i]["TS_KOM1"]
+            </td>
+            @*            <td>
+            <a asp-action="Edit" asp-route-id="@item.ID_Trace">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.ID_Trace">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.ID_Trace">Delete</a>
+        </td>*@
+        </tr>
+}
+    </tbody>
+</table>
